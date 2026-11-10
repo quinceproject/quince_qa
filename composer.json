@@ -1,0 +1,23 @@
+{
+    "name": "quinceproject/qa",
+    "description": "Quince Questions: customers ask about a product, the shop answers, and the answer stays on the product page",
+    "type": "prestashop-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Quince Project",
+            "email": "quinceproject@proton.me"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Quince\\Qa\\": "src/"
+        }
+    },
+    "config": {
+        "prepend-autoloader": false
+    }
+}

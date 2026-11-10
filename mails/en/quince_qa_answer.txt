@@ -1,0 +1,12 @@
+{shop_name}
+Your question has an answer
+
+Hello {customer_name},
+
+{intro}
+
+You asked:
+{question}
+
+Our answer:
+{answer}

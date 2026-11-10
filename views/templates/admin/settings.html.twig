@@ -1,0 +1,120 @@
+{# Ekran modułu w stylistyce silnika: ten sam layout, te same makra pól.
+   Moduł nie ma własnego CSS-u ani własnego sidebara — bierze je stąd. #}
+{% extends '@Modules/quince_engine/views/templates/admin/layout.html.twig' %}
+{% import '@Modules/quince_engine/views/templates/admin/_macros/icons.html.twig' as icons %}
+{% import '@Modules/quince_engine/views/templates/admin/_macros/fields.html.twig' as fields %}
+
+{% trans_default_domain 'Modules.Quinceqa.Admin' %}
+
+{# Pola wielojęzyczne przełączają język Alpine'em: bez tego skryptu każdy język
+   rysuje się obok drugiego, zamiast chować się za przełącznikiem. #}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('../modules/quince_engine/views/js/vendor/alpine.min.js') ~ qcVer }}" defer></script>
+{% endblock %}
+
+{% block quince_actions %}
+    <button type="submit" form="quince-qa-settings" class="qc-btn qc-btn-primary">
+        {{ icons.icon('check', 14) }} {{ 'Save changes'|trans }}
+    </button>
+{% endblock %}
+
+{% block quince_body %}
+
+    <form id="quince-qa-settings" method="post" action="{{ path('quince_qa_settings_save') }}" class="qc-stack">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_qa_settings_save') }}">
+
+        <div class="qc-card">
+            <div class="qc-card-head">
+                <div>
+                    <div class="qc-card-title">{{ 'Who can ask'|trans }}</div>
+                    <div class="qc-card-desc">
+                        {{ 'A question from a guest arrives with an address nobody confirmed, so it is off by default.'|trans }}
+                    </div>
+                </div>
+            </div>
+            <div class="qc-card-body">
+                <div class="qc-field">
+                    {{ fields.toggle('ALLOW_GUESTS', settings.ALLOW_GUESTS == '1', 'Questions from visitors without an account'|trans) }}
+                </div>
+
+                <div class="qc-field">
+                    {{ fields.toggle('MODERATE', settings.MODERATE == '1', 'Read the question before answering it'|trans) }}
+                    <div class="qc-field-note">
+                        {{ 'Off means a question goes straight to the answered queue. It still needs an answer to show up on the product page.'|trans }}
+                    </div>
+                </div>
+
+                <div class="qc-field">
+                    <label class="qc-label" for="qa-per-page">{{ 'Questions per batch'|trans }}</label>
+                    <input type="number" id="qa-per-page" name="PER_PAGE" min="1" max="50"
+                           class="qc-field-base qc-focusable" value="{{ settings.PER_PAGE }}">
+                    <div class="qc-field-note">
+                        {{ 'How many the product page shows before the button that loads more.'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qc-card">
+            <div class="qc-card-head">
+                <div>
+                    <div class="qc-card-title">{{ 'Notifications'|trans }}</div>
+                    <div class="qc-card-desc">
+                        {{ 'Mail is the second road. The question always lands in the queue above, whatever is set here.'|trans }}
+                    </div>
+                </div>
+            </div>
+            <div class="qc-card-body">
+                <div class="qc-field">
+                    {{ fields.toggle('NOTIFY_SHOP', settings.NOTIFY_SHOP == '1', 'Tell the shop about a new question'|trans) }}
+                </div>
+
+                <div class="qc-field">
+                    {{ fields.toggle('NOTIFY_CUSTOMER', settings.NOTIFY_CUSTOMER == '1', 'Tell the customer about the answer'|trans) }}
+                </div>
+
+                <div class="qc-field">
+                    <label class="qc-label">{{ 'Copies go to'|trans }}</label>
+                    <div class="qc-check-list">
+                        {% for contact in contacts %}
+                            <label class="qc-check">
+                                <input type="checkbox" name="COPY_CONTACTS[]" value="{{ contact.id }}"
+                                       {{ contact.id in settings.COPY_CONTACTS|split(',') ? 'checked' : '' }}>
+                                <span>{{ contact.name }} <span class="qc-field-note">{{ contact.email }}</span></span>
+                            </label>
+                        {% else %}
+                            <div class="qc-field-note">{{ 'No contacts in Shop → Contacts yet.'|trans }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="qc-field">
+                    <label class="qc-label" for="qa-author">{{ 'Answers are signed'|trans }}</label>
+                    <input type="text" id="qa-author" name="ANSWER_AUTHOR" maxlength="64"
+                           class="qc-field-base qc-focusable" value="{{ settings.ANSWER_AUTHOR }}">
+                    <div class="qc-field-note">
+                        {{ 'Stands under every answer on the product page. Empty means the shop name.'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qc-card">
+            <div class="qc-card-head">
+                <div>
+                    <div class="qc-card-title">{{ 'Wording'|trans }}</div>
+                    <div class="qc-card-desc">
+                        {{ 'What the customer reads on the product page and in the email.'|trans }}
+                    </div>
+                </div>
+            </div>
+            <div class="qc-card-body">
+                {{ fields.multilangArea('DRAWER_INTRO', 'Above the question form'|trans, languages, texts.DRAWER_INTRO, '', 'One sentence in the drawer, before the field. Empty shows nothing.'|trans, 2) }}
+                {{ fields.multilang('EMAIL_SUBJECT', 'Email subject'|trans, languages, texts.EMAIL_SUBJECT, '', 'What the customer sees in the inbox when the answer arrives. You can put {shop_name} in it. Empty means no email goes out.'|trans) }}
+                {{ fields.multilangArea('EMAIL_BODY', 'Email message'|trans, languages, texts.EMAIL_BODY, '', 'The sentence before the question and the answer in that email.'|trans, 3) }}
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

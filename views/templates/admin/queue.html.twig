@@ -1,0 +1,211 @@
+{# Ekran modułu w stylistyce silnika: ten sam layout, te same makra pól.
+   Moduł nie ma własnego CSS-u ani własnego sidebara — bierze je stąd. #}
+{% extends '@Modules/quince_engine/views/templates/admin/layout.html.twig' %}
+{% import '@Modules/quince_engine/views/templates/admin/_macros/icons.html.twig' as icons %}
+
+{% trans_default_domain 'Modules.Quinceqa.Admin' %}
+
+{# Odpowiedź otwiera się pod wierszem, a nie na osobnym ekranie: sprzedawca widzi
+   pytanie, pisząc odpowiedź. Rozwijaniem steruje Alpine, tak jak w dzienniku ofert. #}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('../modules/quince_engine/views/js/vendor/alpine.min.js') ~ qcVer }}" defer></script>
+{% endblock %}
+
+{% block quince_body %}
+
+<div class="qc-stack" x-data="{ otwarta: null }">
+
+    {# ── Liczby na wierzchu ──
+       Cztery, bo tyle jest stanów sprawy: ile przyszło w ogóle, ile czeka na
+       nas, ile już odpowiedzieliśmy i ile odrzuciliśmy. #}
+    <div class="qc-form-grid qc-form-grid-4">
+        <div class="qc-card">
+            <div class="qc-card-body">
+                <div class="qc-label">{{ 'All questions'|trans }}</div>
+                <div class="qc-stat">{{ stats.all }}</div>
+            </div>
+        </div>
+        <div class="qc-card">
+            <div class="qc-card-body">
+                <div class="qc-label">{{ 'Waiting for an answer'|trans }}</div>
+                <div class="qc-stat">{{ stats.waiting }}</div>
+            </div>
+        </div>
+        <div class="qc-card">
+            <div class="qc-card-body">
+                <div class="qc-label">{{ 'Answered'|trans }}</div>
+                <div class="qc-stat">{{ stats.published }}</div>
+            </div>
+        </div>
+        <div class="qc-card">
+            <div class="qc-card-body">
+                <div class="qc-label">{{ 'Rejected'|trans }}</div>
+                <div class="qc-stat">{{ stats.rejected }}</div>
+            </div>
+        </div>
+    </div>
+
+    {# ── Filtr ──
+       Stan i fraza w adresie, nie w skrypcie: da się wrócić do tych samych
+       wyników i wysłać je komuś. #}
+    <div class="qc-card">
+        <div class="qc-card-body">
+            <form method="get" action="{{ path('quince_qa') }}"
+                  style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end">
+                <div class="qc-field" style="max-inline-size:320px; margin:0">
+                    <label class="qc-label" for="qa-search">{{ 'Find'|trans }}</label>
+                    <input type="search" id="qa-search" name="search" value="{{ search }}"
+                           class="qc-field-base qc-focusable"
+                           placeholder="{{ 'Question, customer or product'|trans }}">
+                </div>
+
+                <div class="qc-field" style="max-inline-size:220px; margin:0">
+                    <label class="qc-label" for="qa-status">{{ 'Status'|trans }}</label>
+                    <div class="qc-select-wrap">
+                        <select id="qa-status" name="status" class="qc-field-base qc-select qc-focusable">
+                            <option value=""{{ status is null ? ' selected' : '' }}>{{ 'All'|trans }}</option>
+                            <option value="0"{{ status == 0 ? ' selected' : '' }}>{{ 'Waiting for an answer'|trans }}</option>
+                            <option value="1"{{ status == 1 ? ' selected' : '' }}>{{ 'Answered'|trans }}</option>
+                            <option value="2"{{ status == 2 ? ' selected' : '' }}>{{ 'Rejected'|trans }}</option>
+                        </select>
+                        {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                    </div>
+                </div>
+
+                <button type="submit" class="qc-btn qc-btn-primary">{{ 'Filter'|trans }}</button>
+
+                {% if search or status is not null %}
+                    <a class="qc-btn" href="{{ path('quince_qa') }}">{{ 'Clear'|trans }}</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    {# ── Lista ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Questions'|trans }}</div>
+                <div class="qc-card-desc">
+                    {{ 'A question shows up on the product page only once you answer it. Until then the customer sees nothing.'|trans }}
+                </div>
+            </div>
+        </div>
+
+        <div class="qc-card-body">
+            {% if rows is empty %}
+                <div class="qc-empty">{{ 'No questions here yet.'|trans }}</div>
+            {% else %}
+                <div class="qc-table-inner">
+                    <table class="qc-table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Question'|trans }}</th>
+                                <th>{{ 'Product'|trans }}</th>
+                                <th style="width:110px">{{ 'Asked'|trans }}</th>
+                                <th style="width:130px">{{ 'Status'|trans }}</th>
+                                <th style="width:120px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                                {# Wiersz z otwartymi szczegółami dostaje wspólne tło ze swoim
+                                   blokiem odpowiedzi, żeby było widać, gdzie kończy się wpis. #}
+                                <tr :class="otwarta === {{ row.id_quince_qa }} && 'qc-row-open'">
+                                    <td>
+                                        <strong>{{ row.customer_name }}</strong>
+                                        <div>{{ row.question }}</div>
+                                    </td>
+                                    <td>
+                                        {{ row.product_name ?: '#' ~ row.id_product }}
+                                        <div class="qc-muted">{{ row.shop_name }}</div>
+                                    </td>
+                                    <td>{{ row.date_add|date('d.m.Y') }}</td>
+                                    <td>
+                                        {% if row.status == 1 %}
+                                            {{ 'Answered'|trans }}
+                                            <div class="qc-muted">{{ row.date_answer|date('d.m.Y') }}</div>
+                                        {% elseif row.status == 2 %}
+                                            {{ 'Rejected'|trans }}
+                                        {% else %}
+                                            {{ 'Waiting for an answer'|trans }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="qc-btn qc-btn-sm"
+                                                @click="otwarta = otwarta === {{ row.id_quince_qa }} ? null : {{ row.id_quince_qa }}">
+                                            {{ row.answer ? 'Edit answer'|trans : 'Answer'|trans }}
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr class="qc-row-detail" x-show="otwarta === {{ row.id_quince_qa }}" x-cloak>
+                                    <td colspan="5">
+                                        <div class="qc-row-detail-box">
+                                            {# Dwa formularze, bo publikacja odpowiedzi i zmiana stanu
+                                               idą pod różne adresy, a formularza nie wolno zagnieździć
+                                               w formularzu. Przyciski stoją mimo to w jednym wierszu:
+                                               wskazują swój formularz atrybutem `form`, więc nie muszą
+                                               leżeć w środku. #}
+                                            <form id="qa-answer-form-{{ row.id_quince_qa }}"
+                                                  method="post" action="{{ path('quince_qa_answer') }}">
+                                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_qa_answer') }}">
+                                                <input type="hidden" name="id" value="{{ row.id_quince_qa }}">
+
+                                                <div class="qc-field">
+                                                    <label class="qc-label" for="qa-answer-{{ row.id_quince_qa }}">
+                                                        {{ 'Your answer'|trans }}
+                                                    </label>
+                                                    <textarea id="qa-answer-{{ row.id_quince_qa }}" name="answer" rows="4"
+                                                              class="qc-field-base qc-focusable">{{ row.answer }}</textarea>
+                                                    <div class="qc-field-note">
+                                                        {{ 'Publishing the answer puts the question and the answer on the product page.'|trans }}
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <form id="qa-status-form-{{ row.id_quince_qa }}"
+                                                  method="post" action="{{ path('quince_qa_status') }}">
+                                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_qa_status') }}">
+                                                <input type="hidden" name="id" value="{{ row.id_quince_qa }}">
+                                            </form>
+
+                                            <div class="qc-row-detail-foot qc-row-detail-actions">
+                                                <button type="submit" form="qa-answer-form-{{ row.id_quince_qa }}"
+                                                        class="qc-btn qc-btn-primary qc-btn-sm">
+                                                    {{ 'Publish the answer'|trans }}
+                                                </button>
+
+                                                {% if row.status != 2 %}
+                                                    <button type="submit" form="qa-status-form-{{ row.id_quince_qa }}"
+                                                            name="do" value="reject" class="qc-btn qc-btn-sm">
+                                                        {{ 'Reject'|trans }}
+                                                    </button>
+                                                {% else %}
+                                                    <button type="submit" form="qa-status-form-{{ row.id_quince_qa }}"
+                                                            name="do" value="wait" class="qc-btn qc-btn-sm">
+                                                        {{ 'Back to the queue'|trans }}
+                                                    </button>
+                                                {% endif %}
+
+                                                {# Usunięcie odsunięte od reszty: stoi obok przycisków,
+                                                   które można cofnąć, a samo cofnąć się nie da. #}
+                                                <button type="submit" form="qa-status-form-{{ row.id_quince_qa }}"
+                                                        name="do" value="delete" class="qc-btn qc-btn-sm qc-btn-danger">
+                                                    {{ 'Delete'|trans }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
