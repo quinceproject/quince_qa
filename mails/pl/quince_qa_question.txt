@@ -1,0 +1,11 @@
+{shop_name}
+Nowe pytanie o produkt
+
+{customer_name} ({customer_email}) pyta o {product_name}:
+
+{question}
+
+{product_url}
+
+Odpowiedz w panelu sklepu, w Quince project > Pytania.
+Odpowiedź pojawi się na stronie produktu.

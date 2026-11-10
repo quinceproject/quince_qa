@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en-US" target-language="pl-PL" datatype="plaintext" original="ModulesQuinceqaAdmin">
+    <body>
+
+      <!-- Moduł -->
+      <trans-unit id="quince.qa.name">
+        <source>Quince questions</source>
+        <target>Quince: pytania</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.description">
+        <source>Customers ask about a product, the shop answers, and the answer stays on the product page.</source>
+        <target>Klienci pytają o produkt, sklep odpowiada, a odpowiedź zostaje na stronie produktu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.uninstall">
+        <source>Uninstall the module? All questions and answers will be removed.</source>
+        <target>Odinstalować moduł? Wszystkie pytania i odpowiedzi zostaną usunięte.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.nav">
+        <source>Questions</source>
+        <target>Pytania</target>
+      </trans-unit>
+
+      <!-- Kolejka: liczniki i filtry -->
+      <trans-unit id="quince.qa.count_all">
+        <source>All questions</source>
+        <target>Wszystkie pytania</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.status_waiting">
+        <source>Waiting for an answer</source>
+        <target>Czeka na odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.status_answered">
+        <source>Answered</source>
+        <target>Z odpowiedzią</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.status_rejected">
+        <source>Rejected</source>
+        <target>Odrzucone</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.find">
+        <source>Find</source>
+        <target>Znajdź</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.find_placeholder">
+        <source>Question, customer or product</source>
+        <target>Pytanie, klient albo produkt</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.status">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.status_all">
+        <source>All</source>
+        <target>Wszystkie</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.filter">
+        <source>Filter</source>
+        <target>Filtruj</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.clear">
+        <source>Clear</source>
+        <target>Wyczyść</target>
+      </trans-unit>
+
+      <!-- Kolejka: tabela -->
+      <trans-unit id="quince.qa.queue_desc">
+        <source>A question shows up on the product page only once you answer it. Until then the customer sees nothing.</source>
+        <target>Pytanie pojawia się na stronie produktu dopiero wtedy, gdy na nie odpowiesz. Do tego czasu klient nic nie widzi.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.empty">
+        <source>No questions here yet.</source>
+        <target>Nie ma tu jeszcze pytań.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.col_question">
+        <source>Question</source>
+        <target>Pytanie</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.col_product">
+        <source>Product</source>
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.col_asked">
+        <source>Asked</source>
+        <target>Zadane</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.edit_answer">
+        <source>Edit answer</source>
+        <target>Edytuj odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.answer">
+        <source>Answer</source>
+        <target>Odpowiedz</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.your_answer">
+        <source>Your answer</source>
+        <target>Twoja odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.publish_hint">
+        <source>Publishing the answer puts the question and the answer on the product page.</source>
+        <target>Opublikowanie odpowiedzi umieszcza pytanie i odpowiedź na stronie produktu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.publish">
+        <source>Publish the answer</source>
+        <target>Opublikuj odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.reject">
+        <source>Reject</source>
+        <target>Odrzuć</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.back_to_queue">
+        <source>Back to the queue</source>
+        <target>Przywróć do kolejki</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.delete">
+        <source>Delete</source>
+        <target>Usuń</target>
+      </trans-unit>
+
+      <!-- Ustawienia -->
+      <trans-unit id="quince.qa.save">
+        <source>Save changes</source>
+        <target>Zapisz zmiany</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.who">
+        <source>Who can ask</source>
+        <target>Kto może pytać</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.who_desc">
+        <source>A question from a guest arrives with an address nobody confirmed, so it is off by default.</source>
+        <target>Pytanie od gościa przychodzi z adresem, którego nikt nie potwierdził, dlatego domyślnie jest to wyłączone.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.guests">
+        <source>Questions from visitors without an account</source>
+        <target>Pytania od odwiedzających bez konta</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.moderate">
+        <source>Read the question before answering it</source>
+        <target>Czytaj pytanie przed odpowiedzią</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.moderate_hint">
+        <source>Off means a question goes straight to the answered queue. It still needs an answer to show up on the product page.</source>
+        <target>Wyłączone oznacza, że pytanie trafia od razu do kolejki z odpowiedzią. Nadal potrzebuje odpowiedzi, żeby pojawić się na stronie produktu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.per_page">
+        <source>Questions per batch</source>
+        <target>Pytań na porcję</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.per_page_hint">
+        <source>How many the product page shows before the button that loads more.</source>
+        <target>Ile pytań strona produktu pokazuje przed przyciskiem, który wczytuje kolejne.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.notifications">
+        <source>Notifications</source>
+        <target>Powiadomienia</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.notifications_desc">
+        <source>Mail is the second road. The question always lands in the queue above, whatever is set here.</source>
+        <target>E-mail to druga droga. Pytanie zawsze trafia do kolejki powyżej, niezależnie od tego, co tu ustawisz.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.notify_shop">
+        <source>Tell the shop about a new question</source>
+        <target>Powiadom sklep o nowym pytaniu</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.notify_customer">
+        <source>Tell the customer about the answer</source>
+        <target>Powiadom klienta o odpowiedzi</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.copies">
+        <source>Copies go to</source>
+        <target>Kopie trafiają do</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.no_contacts">
+        <source>No contacts in Shop → Contacts yet.</source>
+        <target>Brak kontaktów w Sklep → Kontakty.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.signature">
+        <source>Answers are signed</source>
+        <target>Podpis pod odpowiedziami</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.signature_hint">
+        <source>Stands under every answer on the product page. Empty means the shop name.</source>
+        <target>Stoi pod każdą odpowiedzią na stronie produktu. Puste oznacza nazwę sklepu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.wording">
+        <source>Wording</source>
+        <target>Teksty</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.wording_desc">
+        <source>What the customer reads on the product page and in the email.</source>
+        <target>Co klient czyta na stronie produktu i w e-mailu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.form_intro">
+        <source>Above the question form</source>
+        <target>Nad formularzem pytania</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.form_intro_hint">
+        <source>One sentence in the drawer, before the field. Empty shows nothing.</source>
+        <target>Jedno zdanie w panelu bocznym, przed polem. Puste nie pokazuje nic.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.mail_subject">
+        <source>Email subject</source>
+        <target>Temat e-maila</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.mail_subject_hint">
+        <source>What the customer sees in the inbox when the answer arrives. You can put {shop_name} in it. Empty means no email goes out.</source>
+        <target>Co klient widzi w skrzynce, gdy przychodzi odpowiedź. Możesz w nim użyć {shop_name}. Puste oznacza, że e-mail nie wychodzi.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.mail_intro">
+        <source>Email message</source>
+        <target>Treść e-maila</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.mail_intro_hint">
+        <source>The sentence before the question and the answer in that email.</source>
+        <target>Zdanie przed pytaniem i odpowiedzią w tym e-mailu.</target>
+      </trans-unit>
+
+      <!-- Komunikaty -->
+      <trans-unit id="quince.qa.csrf">
+        <source>Invalid security token, please try again.</source>
+        <target>Nieprawidłowy token bezpieczeństwa, spróbuj ponownie.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.answer_required">
+        <source>Write an answer before publishing it.</source>
+        <target>Napisz odpowiedź przed opublikowaniem.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.published">
+        <source>The answer is published on the product page.</source>
+        <target>Odpowiedź jest opublikowana na stronie produktu.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.deleted">
+        <source>The question is deleted.</source>
+        <target>Pytanie usunięte.</target>
+      </trans-unit>
+      <trans-unit id="quince.qa.saved">
+        <source>Settings saved.</source>
+        <target>Ustawienia zapisane.</target>
+      </trans-unit>
+
+    </body>
+  </file>
+</xliff>

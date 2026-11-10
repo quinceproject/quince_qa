@@ -127,7 +127,7 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
         Mail::Send(
             $this->jezykSzablonu($idLang, 'quince_qa_question'),
             'quince_qa_question',
-            $nazwaSklepu . ' — ' . $produkt->name,
+            $nazwaSklepu . ': ' . $produkt->name,
             [
                 '{shop_name}' => $nazwaSklepu,
                 '{customer_name}' => $imie,

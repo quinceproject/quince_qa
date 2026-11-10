@@ -1,0 +1,12 @@
+{shop_name}
+Twoje pytanie ma odpowiedź
+
+Dzień dobry {customer_name},
+
+{intro}
+
+Twoje pytanie:
+{question}
+
+Nasza odpowiedź:
+{answer}
