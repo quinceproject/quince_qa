@@ -38,7 +38,7 @@ class Quince_Qa extends Module
     {
         $this->name = 'quince_qa';
         $this->tab = 'front_office_features';
-        $this->version = '0.1.0';
+        $this->version = '0.1.1';
         $this->author = 'Quince Project';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '9.2.0', 'max' => '9.99.99'];
@@ -93,6 +93,25 @@ class Quince_Qa extends Module
         (new QaSettings())->uninstall();
 
         return QaStore::dropTable() && parent::uninstall();
+    }
+
+    /**
+     * Zgłoszenie do silnika: ekran pytań w grupie „Moduły" jego paska bocznego.
+     *
+     * Silnik buduje tę grupę wyłącznie ze zgłoszeń. Hook był zarejestrowany od
+     * instalacji, ale bez tej metody moduł nic nie zwracał i ekran pytań nie
+     * pojawiał się w pasku silnika. Bez `type`: silnik z niczego tu nie korzysta,
+     * dostaje tylko adres ekranu.
+     *
+     * @return array<int,array{id:string,label:string,route:string}>
+     */
+    public function hookActionQuinceRegisterFeature(): array
+    {
+        return [[
+            'id' => 'quince_qa',
+            'label' => $this->trans('Questions', [], 'Modules.Quinceqa.Admin'),
+            'route' => 'quince_qa',
+        ]];
     }
 
     /**
