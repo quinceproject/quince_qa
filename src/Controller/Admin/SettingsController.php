@@ -79,7 +79,7 @@ class SettingsController extends QaBaseController
 
     /**
      * Pole wielojęzyczne przychodzi jako osobne pole na język, z przyrostkiem
-     * `_<id języka>` w nazwie — tak wypisuje je makro panelu.
+     * `_<id języka>` w nazwie. Tak wypisuje je makro panelu.
      *
      * @return array<int,string>
      */

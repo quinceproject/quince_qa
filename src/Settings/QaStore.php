@@ -18,7 +18,7 @@ use DbQuery;
  * Pytania o produkty: odczyt i zapis.
  *
  * Jedna tabela, `quince_qa`. Pytanie należy do produktu I do sklepu, bo ten sam
- * produkt bywa w kilku sklepach z osobną obsługą — pytanie zadane w jednym nie
+ * produkt bywa w kilku sklepach z osobną obsługą. Pytanie zadane w jednym nie
  * ma się pokazywać w drugim.
  *
  * Stany są trzy, nie dwa: czeka, opublikowane, odrzucone. Odrzucone zostaje
@@ -99,7 +99,7 @@ final class QaStore
      * Lista dla panelu: wybrany stan, najnowsze u góry.
      *
      * Szukanie obejmuje treść pytania, podpis klienta i nazwę produktu, bo po
-     * tych trzech rzeczach sprzedawca pamięta sprawę — nie po numerze wiersza.
+     * tych trzech rzeczach sprzedawca pamięta sprawę, nie po numerze wiersza.
      *
      * @return array<int,array<string,mixed>>
      */
@@ -132,7 +132,7 @@ final class QaStore
         return Db::getInstance()->executeS($sql) ?: [];
     }
 
-    /** Ile pytań w ogóle — liczba na wierzchu ekranu. */
+    /** Ile pytań w ogóle: liczba na wierzchu ekranu. */
     public function countAll(): int
     {
         return (int) Db::getInstance()->getValue(
@@ -140,7 +140,7 @@ final class QaStore
         );
     }
 
-    /** Ile pytań w danym stanie — liczby przy zakładkach panelu. */
+    /** Ile pytań w danym stanie: liczby przy zakładkach panelu. */
     public function countByStatus(int $status): int
     {
         $sql = new DbQuery();

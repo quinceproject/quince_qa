@@ -1,8 +1,8 @@
 # Ekrany modułu pytań: kolejka i ustawienia.
 #
-# `_legacy_controller` wskazuje zakładkę silnika, bo moduł bez niego nie działa —
-# nie zakładamy własnej zakładki tylko po to, żeby PrestaShop miał gdzie sprawdzić
-# uprawnienia.
+# `_legacy_controller` wskazuje zakładkę silnika, bo moduł bez niego nie działa.
+# Moduł nie ma własnej zakładki, więc PrestaShop sprawdza uprawnienia na
+# zakładce silnika.
 quince_qa:
   path: quince/qa
   methods: [GET]

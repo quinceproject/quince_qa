@@ -76,7 +76,7 @@ final class QaPresenter
      * Podpis pod pytaniem: imię i pierwsza litera nazwiska.
      *
      * Pełne nazwisko pod publicznym pytaniem to dana osobowa wystawiona bez
-     * potrzeby — do rozróżnienia dwóch Marków wystarczy inicjał.
+     * potrzeby. Do rozróżnienia dwóch Marków wystarczy inicjał.
      */
     private static function podpis(string $nazwa): string
     {

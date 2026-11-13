@@ -16,10 +16,9 @@ use Quince\Engine\Controller\Admin\QuinceController;
 /**
  * Wspólna podstawa ekranów modułu.
  *
- * Jest tu jedna rzecz: spis zakładek. Moduł ma dwa widoki, więc gdyby każdy
- * kontroler wypisywał listę u siebie, dołożenie trzeciego wymagałoby poprawki
- * w dwóch miejscach — a pierwszy pominięty dawałby ekran bez zakładki, do
- * którego nie da się wrócić.
+ * Jest tu jedna rzecz: spis zakładek, wspólny dla wszystkich widoków modułu.
+ * Nowy widok dopisuje się tutaj; widok pominięty w spisie nie ma zakładki
+ * i nie da się do niego wrócić.
  */
 abstract class QaBaseController extends QuinceController
 {
@@ -49,7 +48,7 @@ abstract class QaBaseController extends QuinceController
             'layoutTitleDomain' => self::DOMENA,
             'quinceTabs' => $this->tabs(),
             'quinceTabsDomain' => self::DOMENA,
-            // Boczny pasek podświetla pozycję modułu, która wskazuje kolejkę —
+            // Boczny pasek podświetla pozycję modułu, która wskazuje kolejkę;
             // ustawienia są jej widokiem, a nie osobną pozycją w menu.
             'quinceRoute' => $route,
             'quinceNavRoute' => 'quince_qa',

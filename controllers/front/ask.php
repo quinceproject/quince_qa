@@ -21,13 +21,13 @@ use Quince\Qa\Settings\QaStore;
  *
  * Formularza nie sprawdzamy tutaj poza tym, co dotyczy samej treści. Znacznik
  * strony, pułapkę, czas wypełnienia i limit powtórzeń bierze na siebie strażnik
- * silnika — odpala się na `actionFrontControllerInitAfter` dla każdego żądania
+ * silnika: odpala się na `actionFrontControllerInitAfter` dla każdego żądania
  * niosącego jego pola i przerywa, zanim ten kod się zacznie.
  *
  * Pytanie idzie dwiema drogami naraz: do tabeli, bo sklep ma na nie odpowiedzieć
  * w panelu, oraz zdarzeniem `qa.question` do odbiorcy ustawionego w silniku,
  * żeby trafiło tam, gdzie sklep prowadzi obsługę. Mail do sklepu jest trzecią
- * drogą i można go wyłączyć — tabela zostaje zawsze.
+ * drogą i można go wyłączyć. Tabela zostaje zawsze.
  */
 class Quince_QaAskModuleFrontController extends ModuleFrontController
 {
@@ -154,7 +154,7 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
     /**
      * Adresy kopii: kontakty sklepu wskazane w ustawieniach.
      *
-     * Identyfikatory, nie adresy — adres kontaktu zmienia się w jednym miejscu,
+     * Identyfikatory, nie adresy: adres kontaktu zmienia się w jednym miejscu,
      * w Sklep → Kontakty, i zmiana dochodzi tutaj sama.
      *
      * @return string[]
@@ -213,7 +213,7 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
      * Zdarzenie wychodzące ze sklepu.
      *
      * Odbiorcę wskazuje sklep w module `quince_events`, w jego ekranie
-     * ustawień — moduł nie zna ani adresu, ani tego, co stoi po drugiej
+     * ustawień. Moduł nie zna ani adresu, ani tego, co stoi po drugiej
      * stronie. Bez ustawionego odbiorcy nie dzieje się nic, a pytanie i tak
      * jest w tabeli.
      */
@@ -231,7 +231,7 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
                 data: [
                     'id_question' => $id,
                     'sender' => [
-                        // Zero znaczy gość. Sklep nie zgaduje, kto to jest —
+                        // Zero znaczy gość. Sklep nie zgaduje, kto to jest;
                         // dopasowaniem do kontaktu zajmuje się odbiorca.
                         'id_customer' => $this->context->customer !== null
                             && $this->context->customer->isLogged()

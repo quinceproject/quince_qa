@@ -20,7 +20,7 @@ use Quince\Qa\Settings\QaSettings;
 use Quince\Qa\Settings\QaStore;
 
 /**
- * Quince QA — pytania klientów o produkt i odpowiedzi sklepu.
+ * Quince QA: pytania klientów o produkt i odpowiedzi sklepu.
  *
  * Klient pyta przy produkcie, sklep odpowiada w panelu, a pytanie z odpowiedzią
  * staje się treścią karty. To nie jest kanał kontaktu, tylko materiał, który
@@ -29,7 +29,7 @@ use Quince\Qa\Settings\QaStore;
  * Dlatego na karcie widać wyłącznie pytania Z ODPOWIEDZIĄ. Pytanie bez niej
  * wygląda jak zignorowany klient, a nie jak sekcja w budowie.
  *
- * Moduł podaje dane, rysuje je motyw — tak samo jak przy opiniach. Znaczniki
+ * Moduł podaje dane, rysuje je motyw, tak samo jak przy opiniach. Znaczniki
  * należą do motywu, więc sekcja wygląda jak reszta akordeonu, a nie jak wstawka.
  */
 class Quince_Qa extends Module

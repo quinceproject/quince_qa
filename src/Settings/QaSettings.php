@@ -159,7 +159,7 @@ final class QaSettings
      *
      * Piszemy do wiersza globalnego, a nie do sklepów z kontekstu. Instalacja
      * idzie z konsoli albo z jednego sklepu, a wartość startowa ma dotyczyć
-     * wszystkich — także tych założonych później.
+     * wszystkich, także tych założonych później.
      */
     public function installDefaults(): void
     {
