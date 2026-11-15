@@ -130,8 +130,10 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
             $nazwaSklepu . ': ' . $produkt->name,
             [
                 '{shop_name}' => $nazwaSklepu,
-                '{customer_name}' => $imie,
-                '{customer_email}' => $email,
+                // Mail::Send wkleja zmienne do HTML bez escapowania, a imię i adres
+                // wpisuje odwiedzający: bez tego wstawiłby do maila własny odnośnik.
+                '{customer_name}' => htmlspecialchars($imie, ENT_QUOTES, 'UTF-8'),
+                '{customer_email}' => htmlspecialchars($email, ENT_QUOTES, 'UTF-8'),
                 '{question}' => nl2br(htmlspecialchars($tresc, ENT_QUOTES, 'UTF-8')),
                 '{product_name}' => (string) $produkt->name,
                 '{product_url}' => $this->context->link->getProductLink($produkt),

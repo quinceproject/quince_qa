@@ -155,7 +155,7 @@ class QueueController extends QaBaseController
             str_replace('{shop_name}', $nazwaSklepu, $temat),
             [
                 '{shop_name}' => $nazwaSklepu,
-                '{customer_name}' => (string) $pytanie['customer_name'],
+                '{customer_name}' => htmlspecialchars((string) $pytanie['customer_name'], ENT_QUOTES, 'UTF-8'),
                 '{question}' => nl2br(htmlspecialchars((string) $pytanie['question'], ENT_QUOTES, 'UTF-8')),
                 '{answer}' => nl2br(htmlspecialchars($odpowiedz, ENT_QUOTES, 'UTF-8')),
                 '{intro}' => $this->settings->text('EMAIL_BODY', $idLang),
