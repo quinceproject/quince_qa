@@ -1,14 +1,14 @@
 # Ekrany modułu pytań: kolejka i ustawienia.
 #
-# `_legacy_controller` wskazuje zakładkę silnika, bo moduł bez niego nie działa.
-# Moduł nie ma własnej zakładki, więc PrestaShop sprawdza uprawnienia na
-# zakładce silnika.
+# `_legacy_controller` wskazuje własną zakładkę modułu (`AdminQuinceQa`).
+# Do niej odnoszą się uprawnienia pracownika: atrybuty `#[AdminSecurity]`
+# w kontrolerach sprawdzają prawa do tej zakładki.
 quince_qa:
   path: quince/qa
   methods: [GET]
   defaults:
     _controller: Quince\Qa\Controller\Admin\QueueController::indexAction
-    _legacy_controller: 'AdminQuince'
+    _legacy_controller: 'AdminQuinceQa'
     _legacy_link: 'AdminQuince'
 
 quince_qa_answer:
@@ -16,7 +16,7 @@ quince_qa_answer:
   methods: [POST]
   defaults:
     _controller: Quince\Qa\Controller\Admin\QueueController::answerAction
-    _legacy_controller: 'AdminQuince'
+    _legacy_controller: 'AdminQuinceQa'
     _legacy_link: 'AdminQuince:save'
 
 quince_qa_status:
@@ -24,7 +24,7 @@ quince_qa_status:
   methods: [POST]
   defaults:
     _controller: Quince\Qa\Controller\Admin\QueueController::statusAction
-    _legacy_controller: 'AdminQuince'
+    _legacy_controller: 'AdminQuinceQa'
     _legacy_link: 'AdminQuince:save'
 
 quince_qa_settings:
@@ -32,7 +32,7 @@ quince_qa_settings:
   methods: [GET]
   defaults:
     _controller: Quince\Qa\Controller\Admin\SettingsController::indexAction
-    _legacy_controller: 'AdminQuince'
+    _legacy_controller: 'AdminQuinceQa'
     _legacy_link: 'AdminQuince'
 
 quince_qa_settings_save:
@@ -40,5 +40,5 @@ quince_qa_settings_save:
   methods: [POST]
   defaults:
     _controller: Quince\Qa\Controller\Admin\SettingsController::saveAction
-    _legacy_controller: 'AdminQuince'
+    _legacy_controller: 'AdminQuinceQa'
     _legacy_link: 'AdminQuince:save'

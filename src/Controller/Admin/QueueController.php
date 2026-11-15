@@ -14,6 +14,7 @@ namespace Quince\Qa\Controller\Admin;
 use Configuration;
 use Language;
 use Mail;
+use PrestaShopBundle\Security\Attribute\AdminSecurity;
 use Quince\Qa\Settings\QaSettings;
 use Quince\Qa\Settings\QaStore;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,6 +37,7 @@ class QueueController extends QaBaseController
     ) {
     }
 
+    #[AdminSecurity("is_granted('read', request.get('_legacy_controller'))", message: 'You do not have permission to view this.')]
     public function indexAction(Request $request): Response
     {
         $stan = $request->query->get('status');
@@ -56,6 +58,7 @@ class QueueController extends QaBaseController
     }
 
     /** Odpowiedź sklepu. Publikuje pytanie i, jeśli sklep tak ustawił, zawiadamia klienta. */
+    #[AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message: 'You do not have permission to change this.')]
     public function answerAction(Request $request): RedirectResponse
     {
         if (!$this->isCsrfTokenValid('quince_qa_answer', $request->request->get('_csrf_token'))) {
@@ -91,6 +94,7 @@ class QueueController extends QaBaseController
     }
 
     /** Odrzucenie, przywrócenie do kolejki albo usunięcie pytania. */
+    #[AdminSecurity("is_granted('delete', request.get('_legacy_controller'))", message: 'You do not have permission to delete this.')]
     public function statusAction(Request $request): RedirectResponse
     {
         if (!$this->isCsrfTokenValid('quince_qa_status', $request->request->get('_csrf_token'))) {
