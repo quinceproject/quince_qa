@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Quince\Qa\Controller\Admin;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Configuration;
 use Language;
 use Mail;

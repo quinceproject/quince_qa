@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Quince\Qa\Settings;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Wiersz z bazy w kształcie, który wypisuje szablon.
  *
