@@ -4,6 +4,14 @@ All notable changes to this module are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2026-11-15
+
+### Fixed
+
+- A question can be asked only about a product the customer can see in the shop. A
+  disabled product or one with visibility set to "Nowhere" is refused. A product that
+  is visible but not available for order still accepts questions.
+
 ## [0.1.4] - 2026-11-15
 
 ### Security

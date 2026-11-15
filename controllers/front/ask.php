@@ -80,7 +80,10 @@ class Quince_QaAskModuleFrontController extends ModuleFrontController
         $idShop = (int) $this->context->shop->id;
         $produkt = new Product($idProduct, false, $idLang, $idShop);
 
-        if (!$produkt->id) {
+        // Pytać można o produkt, który klient może zobaczyć w tym sklepie. Produkt
+        // widoczny, ale wyłączony ze sprzedaży, przechodzi: pytanie o niego ma sens.
+        if (!$produkt->id || !$produkt->active || $produkt->visibility === 'none'
+            || !$produkt->isAssociatedToShop($idShop)) {
             return ['ok' => false, 'error' => 'product'];
         }
 
